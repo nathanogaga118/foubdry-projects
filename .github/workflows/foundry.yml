@@ -1,3 +1,17 @@
-              - name: foundry-toolchain
-                uses: foundry-rs/foundry-toolchain@v1.2.0
-            
+name: foundry
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_foundry_version:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Set up Foundry
+        uses: foundry-rs/foundry-toolchain@v1.2.0
+      
+      - name: Run Foundry --version
+        run: foundry --version
