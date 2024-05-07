@@ -1,17 +1,21 @@
+on: [push]
+
 name: foundry
 
-on:
-  push:
-    branches:
-      - main
-
 jobs:
-  check_foundry_version:
+  check:
+    name: Foundry 
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Set up Foundry
-        uses: foundry-rs/foundry-toolchain@v1.2.0
-      
-      - name: Run Foundry --version
-        run: foundry --version
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Run tests
+        run: forge test -vvv
+
+      - name: Run snapshot
+        run: forge snapshot
