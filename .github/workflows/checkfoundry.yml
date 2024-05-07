@@ -1,0 +1,17 @@
+name: Check Foundry Version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_foundry_version:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Set up Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      
+      - name: Check Foundry Version
+        run: foundry --version
